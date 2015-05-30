@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>JOOOSIII!</title>
+<style>
+  #jositimer {
+    display: block;
+    font-size: 400%;
+    font-family: monospace;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<h1 id="jositimer">###</h1>
+<script>
+var jositime=new Date("Mon Jun 01 2015 20:00:00 GMT+0200 (CEST)");
+function jositimer(){
+  var now, target, seconds, minutes, hours, string;
+  now = new Date();
+  diff = jositime.getTime() - now.getTime();
+
+  if (diff < 0) {
+    diff = -diff;
+  }
+  
+  seconds = Math.floor(diff/1000);
+  minutes = Math.floor(seconds/60);
+  hours = Math.floor(minutes/60);
+
+  seconds %= 60;
+  minutes %= 60;
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+
+  string = hours + ":" + minutes + ":" + seconds
+
+  document.getElementById('jositimer').innerHTML = string;
+}
+
+window.setInterval(jositimer, 100);
+</script>
+</body>
+</html>
