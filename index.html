@@ -23,15 +23,10 @@
 <h1 id="jositimer">###</h1>
 <script>
 var jositime=new Date("Mon Jun 01 2015 20:00:00 GMT+0200 (CEST)");
-function jositimer(){
-  var now, target, seconds, minutes, hours, string;
-  now = new Date();
-  diff = jositime.getTime() - now.getTime();
 
-  if (diff < 0) {
-    diff = -diff;
-  }
-  
+function formatHoursOnly(diff){
+  var seconds, minutes, hours;
+
   seconds = Math.floor(diff/1000);
   minutes = Math.floor(seconds/60);
   hours = Math.floor(minutes/60);
@@ -47,7 +42,42 @@ function jositimer(){
     minutes = "0" + minutes;
   }
 
-  string = hours + ":" + minutes + ":" + seconds
+  return hours + ":" + minutes + ":" + seconds
+}
+
+function formatWithDays(diff){
+  var seconds, minutes, hours, days;
+
+  seconds = Math.floor(diff/1000);
+  minutes = Math.floor(seconds/60);
+  hours = Math.floor(minutes/60);
+  days = Math.floor(hours/24);
+
+  seconds %= 60;
+  minutes %= 60;
+  hours %= 24;
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+
+  return days + "d " + hours + ":" + minutes + ":" + seconds;
+}
+
+function jositimer(){
+  var now, target, seconds, minutes, hours, string, usedays, days, months, years;
+  now = new Date();
+  diff = jositime.getTime() - now.getTime();
+
+  if (diff < 0) {
+    string = formatWithDays(-diff);
+  } else {
+    string = formatHoursOnly(diff);
+  }
 
   document.getElementById('jositimer').innerHTML = string;
 }
