@@ -68,7 +68,7 @@ function formatWithDays(diff){
   return days + "d " + hours + ":" + minutes + ":" + seconds;
 }
 
-function jositimer(){
+function jositimer(element){
   var now, target, seconds, minutes, hours, string, usedays, days, months, years;
   now = new Date();
   diff = jositime.getTime() - now.getTime();
@@ -79,10 +79,16 @@ function jositimer(){
     string = formatHoursOnly(diff);
   }
 
-  document.getElementById('jositimer').innerHTML = string;
+  element.innerHTML = string;
 }
 
-window.setInterval(jositimer, 100);
+var element = document.getElementById('jositimer');
+
+element.addEventListener('click', function(){
+  window.open(document.location.href, '_blank', 'menubar=no,location=no,scrollbars=no,status=no,titlebar=no,toolbar=no');
+});
+
+window.setInterval(function(){ jositimer(element); }, 100);
 </script>
 </body>
 </html>
